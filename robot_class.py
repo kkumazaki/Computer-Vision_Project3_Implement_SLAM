@@ -1,6 +1,11 @@
 from math import *
 import random
 
+# import some resources
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+#%matplotlib inline
 
 ### ------------------------------------- ###
 # Below, is the robot class
@@ -91,6 +96,12 @@ class robot:
         ##    as list.append([index, dx, dy]), this format is important for data creation done later
         
         ## TODO: return the final, complete list of measurements
+        for i in range(self.num_landmarks):
+            dx = self.landmarks[i][0] + self.rand()*self.measurement_noise - self.x
+            dy = self.landmarks[i][1] + self.rand()*self.measurement_noise - self.y
+            if np.sqrt(dx*dx + dy*dy) < self.measurement_range:
+                measurements.append([i, dx, dy])
+
         return measurements
 
 
